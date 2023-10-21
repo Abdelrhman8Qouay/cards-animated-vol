@@ -1,0 +1,290 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    &::selection {
+        color: black;
+        text-shadow: 1px 2px 3px #000;
+        background-color: rgba(0, 255, 255, 0.701);
+        font-weight: 600;
+    }
+}
+
+body {
+    background-color: rgb(33, 33, 33);
+}
+
+
+
+.app {
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.container {
+    margin: 300px auto 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+
+/* ============= card box ============= */
+.card_box {
+    $hover-trans1: 0.3s;
+    $hover-trans2: 0.4s;
+
+    width: 300px;
+    height: 520px;
+    position: relative;
+    user-select: none;
+
+    /* ============= background of card ============= */
+    .background {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        transition: all $hover-trans2 ease-out;
+        transform-style: preserve-3d;
+        background: url(./assets/images/border/border_center_1.png) repeat-y center 0;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+
+        }
+        .winds {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 10;
+            background: linear-gradient(-45deg, #5e5e5eb6, #2929299b, #5c5c5ca3, #2323239f);
+            background-size: 400% 400%;
+            animation: gradientWinds 10s ease infinite;
+
+            transition: all $hover-trans1;
+            opacity: 0;
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            opacity: 0;
+            width: 100%;
+            height: 80px;
+            transition: all 0.5s;
+            position: absolute;
+            left: 0;
+        }
+            &::before {
+            top: 0;
+            height: 100%;
+            background-image: linear-gradient(
+                to top,
+                transparent 46%,
+                rgba(12, 13, 19, 0.5) 68%,
+                rgba(12, 13, 19) 97%
+            );
+        }
+            &::after {
+            bottom: 0;
+            opacity: 1;
+            background-image: linear-gradient(
+                to bottom,
+                transparent 46%,
+                rgba(12, 13, 19, 0.5) 68%,
+                rgba(12, 13, 19) 97%
+            );
+        }
+    }
+    &:hover .background {
+        transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+        box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+        .winds {
+            opacity: 1;
+        }
+        &::before,
+&::after {
+  opacity: 1;
+}
+    }
+
+    /* ============= logo of card ============= */
+    .logo {
+        position: absolute;
+        left: -5px;
+        bottom: 5px;
+        width: 100%;
+        z-index: 100;
+        transition: transform $hover-trans1 ease-out;
+        overflow: hidden;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        &::before {
+            content:"";z-index:10;
+            position:absolute;height:100%;width:200%;top:-120%;left:-120%;
+            background:linear-gradient(transparent 0%,
+            rgba(255, 255, 255, 0.1) 45%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0.1) 55%,
+            transparent 100%);
+            transition:all 2s;
+            transform:rotate(-45deg);
+        }
+    }
+    &:hover .logo {
+        transform: translateY(-35%);
+        &::before {
+            animation: shine 5s infinite forwards;
+        }
+    }
+
+    /* ============= Character of card ============= */
+    .char {
+        position: absolute;
+        left: -30px;
+        width: 120%;
+        z-index: 80;
+        transition: all $hover-trans2 ease-out;
+        overflow: hidden;
+
+        opacity: 0;
+        visibility: hidden;
+        bottom: 0;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .circle-container {
+            $particleNum: 200;
+            $particleColor: hsl(180, 100%, 80%);
+
+            position: absolute;
+            transform: translateY(-10vh);
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+
+            .circle {
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+              mix-blend-mode: screen;
+              background-image: radial-gradient(
+                hsl(180, 100%, 80%),
+                hsl(180, 100%, 80%) 10%,
+                hsla(180, 100%, 80%, 0) 56%
+              );
+
+              animation: fadein-frames 200ms infinite, scale-frames 2s infinite;
+
+              @keyframes fade-frames {
+                0% {
+                  opacity: 1;
+                }
+
+                50% {
+                  opacity: 0.7;
+                }
+
+                100% {
+                  opacity: 1;
+                }
+              }
+
+              @keyframes scale-frames {
+                0% {
+                  transform: scale3d(0.4, 0.4, 1);
+                }
+
+                50% {
+                  transform: scale3d(2.2, 2.2, 1);
+                }
+
+                100% {
+                  transform: scale3d(0.4, 0.4, 1);
+                }
+              }
+            }
+
+            $particleBaseSize: 8;
+
+            @for $i from 1 through $particleNum {
+                &:nth-child(#{$i}) {
+                $circleSize: random($particleBaseSize);
+                width: $circleSize + px;
+                height: $circleSize + px;
+
+                z-index: $particleNum;
+
+                $startPositionY: random(10) + 100;
+                $framesName: "move-frames-" + $i;
+                $moveDuration: 28000 + random(9000) + ms;
+
+                animation-name: #{$framesName};
+                animation-duration: $moveDuration;
+                animation-delay: random(37000) + ms;
+
+                @keyframes #{$framesName} {
+                    from {
+                    transform: translate3d(random(100) + vw, $startPositionY + vh, 0);
+                    }
+
+                    to {
+                    transform: translate3d(random(100) + vw, -$startPositionY - random(30) + vh, 0);
+                    }
+                }
+
+                .circle {
+                    animation-delay: random(4000) + ms;
+                }
+                }
+            }
+        }
+    }
+    &:hover .char {
+        opacity: 1;
+        visibility: visible;
+        bottom: 40%;
+        animation: UpDown 5s infinite ease-in-out;
+    }
+}
+
+@keyframes gradientWinds {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes UpDown {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(5%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes shine{
+    0%{top:-120%;left:-120%;}
+    10%{left:100%;top:100%;}
+    20%{left:100%;top:100%;}
+    100%{left:100%;top:100%;}
+}

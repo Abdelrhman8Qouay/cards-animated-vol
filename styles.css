@@ -1,0 +1,4038 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+*::-moz-selection {
+  color: black;
+  text-shadow: 1px 2px 3px #000;
+  background-color: rgba(0, 255, 255, 0.701);
+  font-weight: 600;
+}
+*::selection {
+  color: black;
+  text-shadow: 1px 2px 3px #000;
+  background-color: rgba(0, 255, 255, 0.701);
+  font-weight: 600;
+}
+
+body {
+  background-color: rgb(33, 33, 33);
+}
+
+.app {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.container {
+  margin: 300px auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+/* ============= card box ============= */
+.card_box {
+  width: 300px;
+  height: 520px;
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  /* ============= background of card ============= */
+  /* ============= logo of card ============= */
+  /* ============= Character of card ============= */
+}
+.card_box .background {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease-out;
+  transform-style: preserve-3d;
+  background: url(./assets/images/border/border_center_1.png) repeat-y center 0;
+}
+.card_box .background img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: 0;
+}
+.card_box .background .winds {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(-45deg, rgba(94, 94, 94, 0.7137254902), rgba(41, 41, 41, 0.6078431373), rgba(92, 92, 92, 0.6392156863), rgba(35, 35, 35, 0.6235294118));
+  background-size: 400% 400%;
+  animation: gradientWinds 10s ease infinite;
+  transition: all 0.3s;
+  opacity: 0;
+}
+.card_box .background::before, .card_box .background::after {
+  content: "";
+  opacity: 0;
+  width: 100%;
+  height: 80px;
+  transition: all 0.5s;
+  position: absolute;
+  left: 0;
+}
+.card_box .background::before {
+  top: 0;
+  height: 100%;
+  background-image: linear-gradient(to top, transparent 46%, rgba(12, 13, 19, 0.5) 68%, rgb(12, 13, 19) 97%);
+}
+.card_box .background::after {
+  bottom: 0;
+  opacity: 1;
+  background-image: linear-gradient(to bottom, transparent 46%, rgba(12, 13, 19, 0.5) 68%, rgb(12, 13, 19) 97%);
+}
+.card_box:hover .background {
+  transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+  box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+}
+.card_box:hover .background .winds {
+  opacity: 1;
+}
+.card_box:hover .background::before, .card_box:hover .background::after {
+  opacity: 1;
+}
+.card_box .logo {
+  position: absolute;
+  left: -5px;
+  bottom: 5px;
+  width: 100%;
+  z-index: 100;
+  transition: transform 0.3s ease-out;
+  overflow: hidden;
+}
+.card_box .logo img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.card_box .logo::before {
+  content: "";
+  z-index: 10;
+  position: absolute;
+  height: 100%;
+  width: 200%;
+  top: -120%;
+  left: -120%;
+  background: linear-gradient(transparent 0%, rgba(255, 255, 255, 0.1) 45%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.1) 55%, transparent 100%);
+  transition: all 2s;
+  transform: rotate(-45deg);
+}
+.card_box:hover .logo {
+  transform: translateY(-35%);
+}
+.card_box:hover .logo::before {
+  animation: shine 5s infinite forwards;
+}
+.card_box .char {
+  position: absolute;
+  left: -30px;
+  width: 120%;
+  z-index: 80;
+  transition: all 0.4s ease-out;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  bottom: 0;
+}
+.card_box .char img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.card_box .char .circle-container {
+  position: absolute;
+  transform: translateY(-10vh);
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+.card_box .char .circle-container .circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  background-image: radial-gradient(hsl(180, 100%, 80%), hsl(180, 100%, 80%) 10%, hsla(180, 100%, 80%, 0) 56%);
+  animation: fadein-frames 200ms infinite, scale-frames 2s infinite;
+}
+@keyframes fade-frames {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes scale-frames {
+  0% {
+    transform: scale3d(0.4, 0.4, 1);
+  }
+  50% {
+    transform: scale3d(2.2, 2.2, 1);
+  }
+  100% {
+    transform: scale3d(0.4, 0.4, 1);
+  }
+}
+.card_box .char .circle-container:nth-child(1) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-1;
+  animation-duration: 34799ms;
+  animation-delay: 30854ms;
+}
+@keyframes move-frames-1 {
+  from {
+    transform: translate3d(8vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(11vw, -119vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(1) .circle {
+  animation-delay: 2493ms;
+}
+.card_box .char .circle-container:nth-child(2) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-2;
+  animation-duration: 36872ms;
+  animation-delay: 31519ms;
+}
+@keyframes move-frames-2 {
+  from {
+    transform: translate3d(42vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(49vw, -119vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(2) .circle {
+  animation-delay: 2299ms;
+}
+.card_box .char .circle-container:nth-child(3) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-3;
+  animation-duration: 33328ms;
+  animation-delay: 28681ms;
+}
+@keyframes move-frames-3 {
+  from {
+    transform: translate3d(24vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(17vw, -126vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(3) .circle {
+  animation-delay: 3060ms;
+}
+.card_box .char .circle-container:nth-child(4) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-4;
+  animation-duration: 31671ms;
+  animation-delay: 26715ms;
+}
+@keyframes move-frames-4 {
+  from {
+    transform: translate3d(29vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(80vw, -122vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(4) .circle {
+  animation-delay: 2389ms;
+}
+.card_box .char .circle-container:nth-child(5) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-5;
+  animation-duration: 29690ms;
+  animation-delay: 2349ms;
+}
+@keyframes move-frames-5 {
+  from {
+    transform: translate3d(82vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(72vw, -103vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(5) .circle {
+  animation-delay: 2764ms;
+}
+.card_box .char .circle-container:nth-child(6) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-6;
+  animation-duration: 34000ms;
+  animation-delay: 2952ms;
+}
+@keyframes move-frames-6 {
+  from {
+    transform: translate3d(36vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(51vw, -135vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(6) .circle {
+  animation-delay: 3263ms;
+}
+.card_box .char .circle-container:nth-child(7) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-7;
+  animation-duration: 30092ms;
+  animation-delay: 690ms;
+}
+@keyframes move-frames-7 {
+  from {
+    transform: translate3d(56vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(33vw, -126vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(7) .circle {
+  animation-delay: 1806ms;
+}
+.card_box .char .circle-container:nth-child(8) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-8;
+  animation-duration: 32177ms;
+  animation-delay: 15657ms;
+}
+@keyframes move-frames-8 {
+  from {
+    transform: translate3d(3vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(20vw, -119vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(8) .circle {
+  animation-delay: 1233ms;
+}
+.card_box .char .circle-container:nth-child(9) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-9;
+  animation-duration: 28640ms;
+  animation-delay: 21249ms;
+}
+@keyframes move-frames-9 {
+  from {
+    transform: translate3d(51vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(6vw, -132vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(9) .circle {
+  animation-delay: 1716ms;
+}
+.card_box .char .circle-container:nth-child(10) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-10;
+  animation-duration: 36311ms;
+  animation-delay: 8995ms;
+}
+@keyframes move-frames-10 {
+  from {
+    transform: translate3d(52vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(84vw, -111vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(10) .circle {
+  animation-delay: 853ms;
+}
+.card_box .char .circle-container:nth-child(11) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-11;
+  animation-duration: 35083ms;
+  animation-delay: 20826ms;
+}
+@keyframes move-frames-11 {
+  from {
+    transform: translate3d(13vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(18vw, -110vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(11) .circle {
+  animation-delay: 390ms;
+}
+.card_box .char .circle-container:nth-child(12) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-12;
+  animation-duration: 36116ms;
+  animation-delay: 24379ms;
+}
+@keyframes move-frames-12 {
+  from {
+    transform: translate3d(23vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(14vw, -127vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(12) .circle {
+  animation-delay: 1130ms;
+}
+.card_box .char .circle-container:nth-child(13) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-13;
+  animation-duration: 31666ms;
+  animation-delay: 33585ms;
+}
+@keyframes move-frames-13 {
+  from {
+    transform: translate3d(60vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(29vw, -116vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(13) .circle {
+  animation-delay: 720ms;
+}
+.card_box .char .circle-container:nth-child(14) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-14;
+  animation-duration: 32956ms;
+  animation-delay: 23078ms;
+}
+@keyframes move-frames-14 {
+  from {
+    transform: translate3d(68vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(90vw, -136vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(14) .circle {
+  animation-delay: 48ms;
+}
+.card_box .char .circle-container:nth-child(15) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-15;
+  animation-duration: 32786ms;
+  animation-delay: 8358ms;
+}
+@keyframes move-frames-15 {
+  from {
+    transform: translate3d(89vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(81vw, -130vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(15) .circle {
+  animation-delay: 509ms;
+}
+.card_box .char .circle-container:nth-child(16) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-16;
+  animation-duration: 36396ms;
+  animation-delay: 27821ms;
+}
+@keyframes move-frames-16 {
+  from {
+    transform: translate3d(41vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(93vw, -127vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(16) .circle {
+  animation-delay: 3841ms;
+}
+.card_box .char .circle-container:nth-child(17) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-17;
+  animation-duration: 31065ms;
+  animation-delay: 13345ms;
+}
+@keyframes move-frames-17 {
+  from {
+    transform: translate3d(36vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(61vw, -106vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(17) .circle {
+  animation-delay: 2038ms;
+}
+.card_box .char .circle-container:nth-child(18) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-18;
+  animation-duration: 29633ms;
+  animation-delay: 10270ms;
+}
+@keyframes move-frames-18 {
+  from {
+    transform: translate3d(61vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(53vw, -109vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(18) .circle {
+  animation-delay: 3147ms;
+}
+.card_box .char .circle-container:nth-child(19) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-19;
+  animation-duration: 29333ms;
+  animation-delay: 10408ms;
+}
+@keyframes move-frames-19 {
+  from {
+    transform: translate3d(82vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(21vw, -133vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(19) .circle {
+  animation-delay: 3890ms;
+}
+.card_box .char .circle-container:nth-child(20) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-20;
+  animation-duration: 36888ms;
+  animation-delay: 1015ms;
+}
+@keyframes move-frames-20 {
+  from {
+    transform: translate3d(83vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(22vw, -107vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(20) .circle {
+  animation-delay: 963ms;
+}
+.card_box .char .circle-container:nth-child(21) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-21;
+  animation-duration: 36129ms;
+  animation-delay: 7282ms;
+}
+@keyframes move-frames-21 {
+  from {
+    transform: translate3d(21vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(94vw, -118vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(21) .circle {
+  animation-delay: 2837ms;
+}
+.card_box .char .circle-container:nth-child(22) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-22;
+  animation-duration: 35926ms;
+  animation-delay: 31271ms;
+}
+@keyframes move-frames-22 {
+  from {
+    transform: translate3d(70vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(21vw, -131vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(22) .circle {
+  animation-delay: 241ms;
+}
+.card_box .char .circle-container:nth-child(23) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-23;
+  animation-duration: 31627ms;
+  animation-delay: 27482ms;
+}
+@keyframes move-frames-23 {
+  from {
+    transform: translate3d(90vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(28vw, -123vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(23) .circle {
+  animation-delay: 1657ms;
+}
+.card_box .char .circle-container:nth-child(24) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-24;
+  animation-duration: 30427ms;
+  animation-delay: 29363ms;
+}
+@keyframes move-frames-24 {
+  from {
+    transform: translate3d(79vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(21vw, -105vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(24) .circle {
+  animation-delay: 1578ms;
+}
+.card_box .char .circle-container:nth-child(25) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-25;
+  animation-duration: 36623ms;
+  animation-delay: 896ms;
+}
+@keyframes move-frames-25 {
+  from {
+    transform: translate3d(33vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(5vw, -115vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(25) .circle {
+  animation-delay: 3391ms;
+}
+.card_box .char .circle-container:nth-child(26) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-26;
+  animation-duration: 35537ms;
+  animation-delay: 36757ms;
+}
+@keyframes move-frames-26 {
+  from {
+    transform: translate3d(57vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(67vw, -130vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(26) .circle {
+  animation-delay: 2780ms;
+}
+.card_box .char .circle-container:nth-child(27) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-27;
+  animation-duration: 31159ms;
+  animation-delay: 30521ms;
+}
+@keyframes move-frames-27 {
+  from {
+    transform: translate3d(50vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(33vw, -119vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(27) .circle {
+  animation-delay: 2186ms;
+}
+.card_box .char .circle-container:nth-child(28) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-28;
+  animation-duration: 35581ms;
+  animation-delay: 4637ms;
+}
+@keyframes move-frames-28 {
+  from {
+    transform: translate3d(69vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(31vw, -112vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(28) .circle {
+  animation-delay: 2250ms;
+}
+.card_box .char .circle-container:nth-child(29) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-29;
+  animation-duration: 32217ms;
+  animation-delay: 8068ms;
+}
+@keyframes move-frames-29 {
+  from {
+    transform: translate3d(11vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(89vw, -114vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(29) .circle {
+  animation-delay: 1689ms;
+}
+.card_box .char .circle-container:nth-child(30) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-30;
+  animation-duration: 29480ms;
+  animation-delay: 15005ms;
+}
+@keyframes move-frames-30 {
+  from {
+    transform: translate3d(46vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(74vw, -127vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(30) .circle {
+  animation-delay: 1402ms;
+}
+.card_box .char .circle-container:nth-child(31) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-31;
+  animation-duration: 32727ms;
+  animation-delay: 5347ms;
+}
+@keyframes move-frames-31 {
+  from {
+    transform: translate3d(30vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(50vw, -131vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(31) .circle {
+  animation-delay: 3674ms;
+}
+.card_box .char .circle-container:nth-child(32) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-32;
+  animation-duration: 29615ms;
+  animation-delay: 20353ms;
+}
+@keyframes move-frames-32 {
+  from {
+    transform: translate3d(96vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(39vw, -124vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(32) .circle {
+  animation-delay: 1920ms;
+}
+.card_box .char .circle-container:nth-child(33) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-33;
+  animation-duration: 28094ms;
+  animation-delay: 18070ms;
+}
+@keyframes move-frames-33 {
+  from {
+    transform: translate3d(55vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(56vw, -106vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(33) .circle {
+  animation-delay: 896ms;
+}
+.card_box .char .circle-container:nth-child(34) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-34;
+  animation-duration: 36787ms;
+  animation-delay: 8644ms;
+}
+@keyframes move-frames-34 {
+  from {
+    transform: translate3d(51vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(87vw, -128vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(34) .circle {
+  animation-delay: 1846ms;
+}
+.card_box .char .circle-container:nth-child(35) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-35;
+  animation-duration: 35701ms;
+  animation-delay: 4927ms;
+}
+@keyframes move-frames-35 {
+  from {
+    transform: translate3d(97vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(96vw, -126vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(35) .circle {
+  animation-delay: 1759ms;
+}
+.card_box .char .circle-container:nth-child(36) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-36;
+  animation-duration: 28149ms;
+  animation-delay: 30880ms;
+}
+@keyframes move-frames-36 {
+  from {
+    transform: translate3d(29vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(66vw, -124vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(36) .circle {
+  animation-delay: 1875ms;
+}
+.card_box .char .circle-container:nth-child(37) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-37;
+  animation-duration: 32721ms;
+  animation-delay: 19066ms;
+}
+@keyframes move-frames-37 {
+  from {
+    transform: translate3d(5vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(40vw, -107vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(37) .circle {
+  animation-delay: 3145ms;
+}
+.card_box .char .circle-container:nth-child(38) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-38;
+  animation-duration: 34235ms;
+  animation-delay: 31521ms;
+}
+@keyframes move-frames-38 {
+  from {
+    transform: translate3d(10vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(96vw, -135vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(38) .circle {
+  animation-delay: 2930ms;
+}
+.card_box .char .circle-container:nth-child(39) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-39;
+  animation-duration: 28091ms;
+  animation-delay: 16764ms;
+}
+@keyframes move-frames-39 {
+  from {
+    transform: translate3d(71vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(60vw, -133vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(39) .circle {
+  animation-delay: 912ms;
+}
+.card_box .char .circle-container:nth-child(40) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-40;
+  animation-duration: 36406ms;
+  animation-delay: 10549ms;
+}
+@keyframes move-frames-40 {
+  from {
+    transform: translate3d(65vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(23vw, -130vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(40) .circle {
+  animation-delay: 3288ms;
+}
+.card_box .char .circle-container:nth-child(41) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-41;
+  animation-duration: 29913ms;
+  animation-delay: 21562ms;
+}
+@keyframes move-frames-41 {
+  from {
+    transform: translate3d(26vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(61vw, -111vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(41) .circle {
+  animation-delay: 843ms;
+}
+.card_box .char .circle-container:nth-child(42) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-42;
+  animation-duration: 31242ms;
+  animation-delay: 30350ms;
+}
+@keyframes move-frames-42 {
+  from {
+    transform: translate3d(77vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(22vw, -139vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(42) .circle {
+  animation-delay: 935ms;
+}
+.card_box .char .circle-container:nth-child(43) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-43;
+  animation-duration: 30833ms;
+  animation-delay: 18694ms;
+}
+@keyframes move-frames-43 {
+  from {
+    transform: translate3d(14vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(73vw, -128vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(43) .circle {
+  animation-delay: 677ms;
+}
+.card_box .char .circle-container:nth-child(44) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-44;
+  animation-duration: 29140ms;
+  animation-delay: 31210ms;
+}
+@keyframes move-frames-44 {
+  from {
+    transform: translate3d(86vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(63vw, -112vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(44) .circle {
+  animation-delay: 2029ms;
+}
+.card_box .char .circle-container:nth-child(45) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-45;
+  animation-duration: 29693ms;
+  animation-delay: 9668ms;
+}
+@keyframes move-frames-45 {
+  from {
+    transform: translate3d(82vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(51vw, -120vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(45) .circle {
+  animation-delay: 3071ms;
+}
+.card_box .char .circle-container:nth-child(46) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-46;
+  animation-duration: 31363ms;
+  animation-delay: 19349ms;
+}
+@keyframes move-frames-46 {
+  from {
+    transform: translate3d(20vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(79vw, -134vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(46) .circle {
+  animation-delay: 865ms;
+}
+.card_box .char .circle-container:nth-child(47) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-47;
+  animation-duration: 33222ms;
+  animation-delay: 34352ms;
+}
+@keyframes move-frames-47 {
+  from {
+    transform: translate3d(67vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(83vw, -113vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(47) .circle {
+  animation-delay: 3004ms;
+}
+.card_box .char .circle-container:nth-child(48) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-48;
+  animation-duration: 31560ms;
+  animation-delay: 17295ms;
+}
+@keyframes move-frames-48 {
+  from {
+    transform: translate3d(82vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(78vw, -116vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(48) .circle {
+  animation-delay: 1001ms;
+}
+.card_box .char .circle-container:nth-child(49) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-49;
+  animation-duration: 28473ms;
+  animation-delay: 6206ms;
+}
+@keyframes move-frames-49 {
+  from {
+    transform: translate3d(18vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(24vw, -120vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(49) .circle {
+  animation-delay: 2880ms;
+}
+.card_box .char .circle-container:nth-child(50) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-50;
+  animation-duration: 29772ms;
+  animation-delay: 6849ms;
+}
+@keyframes move-frames-50 {
+  from {
+    transform: translate3d(77vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(93vw, -119vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(50) .circle {
+  animation-delay: 522ms;
+}
+.card_box .char .circle-container:nth-child(51) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-51;
+  animation-duration: 35190ms;
+  animation-delay: 32897ms;
+}
+@keyframes move-frames-51 {
+  from {
+    transform: translate3d(100vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(94vw, -109vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(51) .circle {
+  animation-delay: 3513ms;
+}
+.card_box .char .circle-container:nth-child(52) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-52;
+  animation-duration: 35038ms;
+  animation-delay: 31504ms;
+}
+@keyframes move-frames-52 {
+  from {
+    transform: translate3d(41vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(53vw, -123vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(52) .circle {
+  animation-delay: 686ms;
+}
+.card_box .char .circle-container:nth-child(53) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-53;
+  animation-duration: 28747ms;
+  animation-delay: 792ms;
+}
+@keyframes move-frames-53 {
+  from {
+    transform: translate3d(65vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(88vw, -136vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(53) .circle {
+  animation-delay: 1363ms;
+}
+.card_box .char .circle-container:nth-child(54) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-54;
+  animation-duration: 33141ms;
+  animation-delay: 4664ms;
+}
+@keyframes move-frames-54 {
+  from {
+    transform: translate3d(79vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(6vw, -116vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(54) .circle {
+  animation-delay: 3222ms;
+}
+.card_box .char .circle-container:nth-child(55) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-55;
+  animation-duration: 30662ms;
+  animation-delay: 36867ms;
+}
+@keyframes move-frames-55 {
+  from {
+    transform: translate3d(76vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(12vw, -114vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(55) .circle {
+  animation-delay: 1022ms;
+}
+.card_box .char .circle-container:nth-child(56) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-56;
+  animation-duration: 33510ms;
+  animation-delay: 7457ms;
+}
+@keyframes move-frames-56 {
+  from {
+    transform: translate3d(6vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(24vw, -119vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(56) .circle {
+  animation-delay: 3850ms;
+}
+.card_box .char .circle-container:nth-child(57) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-57;
+  animation-duration: 32827ms;
+  animation-delay: 36188ms;
+}
+@keyframes move-frames-57 {
+  from {
+    transform: translate3d(76vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(70vw, -134vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(57) .circle {
+  animation-delay: 449ms;
+}
+.card_box .char .circle-container:nth-child(58) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-58;
+  animation-duration: 28759ms;
+  animation-delay: 21620ms;
+}
+@keyframes move-frames-58 {
+  from {
+    transform: translate3d(94vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(90vw, -127vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(58) .circle {
+  animation-delay: 1515ms;
+}
+.card_box .char .circle-container:nth-child(59) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-59;
+  animation-duration: 36045ms;
+  animation-delay: 19350ms;
+}
+@keyframes move-frames-59 {
+  from {
+    transform: translate3d(45vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(91vw, -124vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(59) .circle {
+  animation-delay: 1599ms;
+}
+.card_box .char .circle-container:nth-child(60) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-60;
+  animation-duration: 30276ms;
+  animation-delay: 36746ms;
+}
+@keyframes move-frames-60 {
+  from {
+    transform: translate3d(21vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(58vw, -136vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(60) .circle {
+  animation-delay: 3998ms;
+}
+.card_box .char .circle-container:nth-child(61) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-61;
+  animation-duration: 28536ms;
+  animation-delay: 33664ms;
+}
+@keyframes move-frames-61 {
+  from {
+    transform: translate3d(78vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(17vw, -135vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(61) .circle {
+  animation-delay: 2255ms;
+}
+.card_box .char .circle-container:nth-child(62) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-62;
+  animation-duration: 35314ms;
+  animation-delay: 28583ms;
+}
+@keyframes move-frames-62 {
+  from {
+    transform: translate3d(3vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(6vw, -133vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(62) .circle {
+  animation-delay: 1087ms;
+}
+.card_box .char .circle-container:nth-child(63) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-63;
+  animation-duration: 33052ms;
+  animation-delay: 15479ms;
+}
+@keyframes move-frames-63 {
+  from {
+    transform: translate3d(58vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(71vw, -139vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(63) .circle {
+  animation-delay: 2509ms;
+}
+.card_box .char .circle-container:nth-child(64) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-64;
+  animation-duration: 29668ms;
+  animation-delay: 33320ms;
+}
+@keyframes move-frames-64 {
+  from {
+    transform: translate3d(65vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(35vw, -132vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(64) .circle {
+  animation-delay: 2541ms;
+}
+.card_box .char .circle-container:nth-child(65) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-65;
+  animation-duration: 29468ms;
+  animation-delay: 10805ms;
+}
+@keyframes move-frames-65 {
+  from {
+    transform: translate3d(98vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(29vw, -115vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(65) .circle {
+  animation-delay: 564ms;
+}
+.card_box .char .circle-container:nth-child(66) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-66;
+  animation-duration: 29333ms;
+  animation-delay: 25937ms;
+}
+@keyframes move-frames-66 {
+  from {
+    transform: translate3d(58vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(48vw, -115vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(66) .circle {
+  animation-delay: 3508ms;
+}
+.card_box .char .circle-container:nth-child(67) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-67;
+  animation-duration: 31778ms;
+  animation-delay: 27181ms;
+}
+@keyframes move-frames-67 {
+  from {
+    transform: translate3d(81vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(58vw, -134vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(67) .circle {
+  animation-delay: 1651ms;
+}
+.card_box .char .circle-container:nth-child(68) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-68;
+  animation-duration: 36113ms;
+  animation-delay: 7042ms;
+}
+@keyframes move-frames-68 {
+  from {
+    transform: translate3d(76vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(16vw, -112vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(68) .circle {
+  animation-delay: 2182ms;
+}
+.card_box .char .circle-container:nth-child(69) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-69;
+  animation-duration: 31132ms;
+  animation-delay: 8500ms;
+}
+@keyframes move-frames-69 {
+  from {
+    transform: translate3d(70vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(83vw, -122vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(69) .circle {
+  animation-delay: 3875ms;
+}
+.card_box .char .circle-container:nth-child(70) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-70;
+  animation-duration: 34803ms;
+  animation-delay: 17275ms;
+}
+@keyframes move-frames-70 {
+  from {
+    transform: translate3d(92vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(74vw, -112vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(70) .circle {
+  animation-delay: 836ms;
+}
+.card_box .char .circle-container:nth-child(71) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-71;
+  animation-duration: 31618ms;
+  animation-delay: 34770ms;
+}
+@keyframes move-frames-71 {
+  from {
+    transform: translate3d(69vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(72vw, -119vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(71) .circle {
+  animation-delay: 2743ms;
+}
+.card_box .char .circle-container:nth-child(72) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-72;
+  animation-duration: 36616ms;
+  animation-delay: 23027ms;
+}
+@keyframes move-frames-72 {
+  from {
+    transform: translate3d(5vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(7vw, -114vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(72) .circle {
+  animation-delay: 1011ms;
+}
+.card_box .char .circle-container:nth-child(73) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-73;
+  animation-duration: 32885ms;
+  animation-delay: 3094ms;
+}
+@keyframes move-frames-73 {
+  from {
+    transform: translate3d(43vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(96vw, -114vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(73) .circle {
+  animation-delay: 295ms;
+}
+.card_box .char .circle-container:nth-child(74) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-74;
+  animation-duration: 36281ms;
+  animation-delay: 15387ms;
+}
+@keyframes move-frames-74 {
+  from {
+    transform: translate3d(25vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(17vw, -127vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(74) .circle {
+  animation-delay: 1407ms;
+}
+.card_box .char .circle-container:nth-child(75) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-75;
+  animation-duration: 35560ms;
+  animation-delay: 13855ms;
+}
+@keyframes move-frames-75 {
+  from {
+    transform: translate3d(76vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(27vw, -132vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(75) .circle {
+  animation-delay: 569ms;
+}
+.card_box .char .circle-container:nth-child(76) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-76;
+  animation-duration: 31472ms;
+  animation-delay: 3211ms;
+}
+@keyframes move-frames-76 {
+  from {
+    transform: translate3d(61vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(53vw, -126vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(76) .circle {
+  animation-delay: 2627ms;
+}
+.card_box .char .circle-container:nth-child(77) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-77;
+  animation-duration: 29626ms;
+  animation-delay: 9563ms;
+}
+@keyframes move-frames-77 {
+  from {
+    transform: translate3d(33vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(82vw, -103vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(77) .circle {
+  animation-delay: 1016ms;
+}
+.card_box .char .circle-container:nth-child(78) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-78;
+  animation-duration: 36047ms;
+  animation-delay: 24088ms;
+}
+@keyframes move-frames-78 {
+  from {
+    transform: translate3d(70vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(16vw, -108vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(78) .circle {
+  animation-delay: 701ms;
+}
+.card_box .char .circle-container:nth-child(79) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-79;
+  animation-duration: 35951ms;
+  animation-delay: 24014ms;
+}
+@keyframes move-frames-79 {
+  from {
+    transform: translate3d(27vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(71vw, -113vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(79) .circle {
+  animation-delay: 2707ms;
+}
+.card_box .char .circle-container:nth-child(80) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-80;
+  animation-duration: 35863ms;
+  animation-delay: 19897ms;
+}
+@keyframes move-frames-80 {
+  from {
+    transform: translate3d(54vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(4vw, -107vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(80) .circle {
+  animation-delay: 3868ms;
+}
+.card_box .char .circle-container:nth-child(81) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-81;
+  animation-duration: 34938ms;
+  animation-delay: 10427ms;
+}
+@keyframes move-frames-81 {
+  from {
+    transform: translate3d(12vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(70vw, -111vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(81) .circle {
+  animation-delay: 3453ms;
+}
+.card_box .char .circle-container:nth-child(82) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-82;
+  animation-duration: 31643ms;
+  animation-delay: 20008ms;
+}
+@keyframes move-frames-82 {
+  from {
+    transform: translate3d(84vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(96vw, -104vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(82) .circle {
+  animation-delay: 1040ms;
+}
+.card_box .char .circle-container:nth-child(83) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-83;
+  animation-duration: 30327ms;
+  animation-delay: 21244ms;
+}
+@keyframes move-frames-83 {
+  from {
+    transform: translate3d(73vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(2vw, -135vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(83) .circle {
+  animation-delay: 1899ms;
+}
+.card_box .char .circle-container:nth-child(84) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-84;
+  animation-duration: 28018ms;
+  animation-delay: 21025ms;
+}
+@keyframes move-frames-84 {
+  from {
+    transform: translate3d(52vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(71vw, -138vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(84) .circle {
+  animation-delay: 3926ms;
+}
+.card_box .char .circle-container:nth-child(85) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-85;
+  animation-duration: 32699ms;
+  animation-delay: 35030ms;
+}
+@keyframes move-frames-85 {
+  from {
+    transform: translate3d(49vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(95vw, -134vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(85) .circle {
+  animation-delay: 682ms;
+}
+.card_box .char .circle-container:nth-child(86) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-86;
+  animation-duration: 34522ms;
+  animation-delay: 19214ms;
+}
+@keyframes move-frames-86 {
+  from {
+    transform: translate3d(83vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(26vw, -119vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(86) .circle {
+  animation-delay: 3540ms;
+}
+.card_box .char .circle-container:nth-child(87) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-87;
+  animation-duration: 35171ms;
+  animation-delay: 1895ms;
+}
+@keyframes move-frames-87 {
+  from {
+    transform: translate3d(4vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(98vw, -137vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(87) .circle {
+  animation-delay: 2291ms;
+}
+.card_box .char .circle-container:nth-child(88) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-88;
+  animation-duration: 35241ms;
+  animation-delay: 31332ms;
+}
+@keyframes move-frames-88 {
+  from {
+    transform: translate3d(93vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(43vw, -104vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(88) .circle {
+  animation-delay: 2664ms;
+}
+.card_box .char .circle-container:nth-child(89) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-89;
+  animation-duration: 35781ms;
+  animation-delay: 422ms;
+}
+@keyframes move-frames-89 {
+  from {
+    transform: translate3d(38vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(34vw, -126vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(89) .circle {
+  animation-delay: 2201ms;
+}
+.card_box .char .circle-container:nth-child(90) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-90;
+  animation-duration: 32996ms;
+  animation-delay: 21915ms;
+}
+@keyframes move-frames-90 {
+  from {
+    transform: translate3d(14vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(49vw, -128vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(90) .circle {
+  animation-delay: 2946ms;
+}
+.card_box .char .circle-container:nth-child(91) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-91;
+  animation-duration: 31825ms;
+  animation-delay: 10025ms;
+}
+@keyframes move-frames-91 {
+  from {
+    transform: translate3d(33vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(84vw, -115vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(91) .circle {
+  animation-delay: 646ms;
+}
+.card_box .char .circle-container:nth-child(92) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-92;
+  animation-duration: 30477ms;
+  animation-delay: 33128ms;
+}
+@keyframes move-frames-92 {
+  from {
+    transform: translate3d(53vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(29vw, -134vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(92) .circle {
+  animation-delay: 3303ms;
+}
+.card_box .char .circle-container:nth-child(93) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-93;
+  animation-duration: 34124ms;
+  animation-delay: 16388ms;
+}
+@keyframes move-frames-93 {
+  from {
+    transform: translate3d(76vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(18vw, -114vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(93) .circle {
+  animation-delay: 3069ms;
+}
+.card_box .char .circle-container:nth-child(94) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-94;
+  animation-duration: 30506ms;
+  animation-delay: 6356ms;
+}
+@keyframes move-frames-94 {
+  from {
+    transform: translate3d(88vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(43vw, -116vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(94) .circle {
+  animation-delay: 3854ms;
+}
+.card_box .char .circle-container:nth-child(95) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-95;
+  animation-duration: 30236ms;
+  animation-delay: 5475ms;
+}
+@keyframes move-frames-95 {
+  from {
+    transform: translate3d(75vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(25vw, -115vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(95) .circle {
+  animation-delay: 681ms;
+}
+.card_box .char .circle-container:nth-child(96) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-96;
+  animation-duration: 32164ms;
+  animation-delay: 36395ms;
+}
+@keyframes move-frames-96 {
+  from {
+    transform: translate3d(83vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(78vw, -130vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(96) .circle {
+  animation-delay: 3883ms;
+}
+.card_box .char .circle-container:nth-child(97) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-97;
+  animation-duration: 36211ms;
+  animation-delay: 27579ms;
+}
+@keyframes move-frames-97 {
+  from {
+    transform: translate3d(52vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(48vw, -123vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(97) .circle {
+  animation-delay: 2959ms;
+}
+.card_box .char .circle-container:nth-child(98) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-98;
+  animation-duration: 35722ms;
+  animation-delay: 7843ms;
+}
+@keyframes move-frames-98 {
+  from {
+    transform: translate3d(14vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(28vw, -110vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(98) .circle {
+  animation-delay: 1396ms;
+}
+.card_box .char .circle-container:nth-child(99) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-99;
+  animation-duration: 29127ms;
+  animation-delay: 7726ms;
+}
+@keyframes move-frames-99 {
+  from {
+    transform: translate3d(13vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(22vw, -114vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(99) .circle {
+  animation-delay: 1382ms;
+}
+.card_box .char .circle-container:nth-child(100) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-100;
+  animation-duration: 33090ms;
+  animation-delay: 33604ms;
+}
+@keyframes move-frames-100 {
+  from {
+    transform: translate3d(44vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(33vw, -126vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(100) .circle {
+  animation-delay: 1130ms;
+}
+.card_box .char .circle-container:nth-child(101) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-101;
+  animation-duration: 28722ms;
+  animation-delay: 928ms;
+}
+@keyframes move-frames-101 {
+  from {
+    transform: translate3d(63vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(51vw, -138vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(101) .circle {
+  animation-delay: 3287ms;
+}
+.card_box .char .circle-container:nth-child(102) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-102;
+  animation-duration: 33223ms;
+  animation-delay: 3048ms;
+}
+@keyframes move-frames-102 {
+  from {
+    transform: translate3d(58vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(47vw, -109vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(102) .circle {
+  animation-delay: 3889ms;
+}
+.card_box .char .circle-container:nth-child(103) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-103;
+  animation-duration: 32183ms;
+  animation-delay: 31353ms;
+}
+@keyframes move-frames-103 {
+  from {
+    transform: translate3d(79vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(19vw, -126vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(103) .circle {
+  animation-delay: 2650ms;
+}
+.card_box .char .circle-container:nth-child(104) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-104;
+  animation-duration: 33006ms;
+  animation-delay: 25903ms;
+}
+@keyframes move-frames-104 {
+  from {
+    transform: translate3d(43vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(5vw, -121vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(104) .circle {
+  animation-delay: 168ms;
+}
+.card_box .char .circle-container:nth-child(105) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-105;
+  animation-duration: 28962ms;
+  animation-delay: 25606ms;
+}
+@keyframes move-frames-105 {
+  from {
+    transform: translate3d(40vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(50vw, -130vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(105) .circle {
+  animation-delay: 680ms;
+}
+.card_box .char .circle-container:nth-child(106) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-106;
+  animation-duration: 28079ms;
+  animation-delay: 32785ms;
+}
+@keyframes move-frames-106 {
+  from {
+    transform: translate3d(43vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(4vw, -113vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(106) .circle {
+  animation-delay: 3017ms;
+}
+.card_box .char .circle-container:nth-child(107) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-107;
+  animation-duration: 31327ms;
+  animation-delay: 25693ms;
+}
+@keyframes move-frames-107 {
+  from {
+    transform: translate3d(66vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(50vw, -115vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(107) .circle {
+  animation-delay: 2362ms;
+}
+.card_box .char .circle-container:nth-child(108) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-108;
+  animation-duration: 32066ms;
+  animation-delay: 391ms;
+}
+@keyframes move-frames-108 {
+  from {
+    transform: translate3d(48vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(70vw, -118vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(108) .circle {
+  animation-delay: 1207ms;
+}
+.card_box .char .circle-container:nth-child(109) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-109;
+  animation-duration: 32980ms;
+  animation-delay: 21433ms;
+}
+@keyframes move-frames-109 {
+  from {
+    transform: translate3d(57vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(55vw, -110vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(109) .circle {
+  animation-delay: 3384ms;
+}
+.card_box .char .circle-container:nth-child(110) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-110;
+  animation-duration: 30058ms;
+  animation-delay: 35790ms;
+}
+@keyframes move-frames-110 {
+  from {
+    transform: translate3d(100vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(78vw, -121vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(110) .circle {
+  animation-delay: 3312ms;
+}
+.card_box .char .circle-container:nth-child(111) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-111;
+  animation-duration: 28711ms;
+  animation-delay: 15676ms;
+}
+@keyframes move-frames-111 {
+  from {
+    transform: translate3d(65vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(35vw, -127vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(111) .circle {
+  animation-delay: 842ms;
+}
+.card_box .char .circle-container:nth-child(112) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-112;
+  animation-duration: 34464ms;
+  animation-delay: 13710ms;
+}
+@keyframes move-frames-112 {
+  from {
+    transform: translate3d(96vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(67vw, -113vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(112) .circle {
+  animation-delay: 335ms;
+}
+.card_box .char .circle-container:nth-child(113) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-113;
+  animation-duration: 36223ms;
+  animation-delay: 26288ms;
+}
+@keyframes move-frames-113 {
+  from {
+    transform: translate3d(46vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(98vw, -104vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(113) .circle {
+  animation-delay: 1224ms;
+}
+.card_box .char .circle-container:nth-child(114) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-114;
+  animation-duration: 35628ms;
+  animation-delay: 3297ms;
+}
+@keyframes move-frames-114 {
+  from {
+    transform: translate3d(18vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(100vw, -105vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(114) .circle {
+  animation-delay: 119ms;
+}
+.card_box .char .circle-container:nth-child(115) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-115;
+  animation-duration: 32506ms;
+  animation-delay: 33202ms;
+}
+@keyframes move-frames-115 {
+  from {
+    transform: translate3d(82vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(61vw, -114vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(115) .circle {
+  animation-delay: 1926ms;
+}
+.card_box .char .circle-container:nth-child(116) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-116;
+  animation-duration: 34840ms;
+  animation-delay: 10903ms;
+}
+@keyframes move-frames-116 {
+  from {
+    transform: translate3d(19vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(88vw, -121vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(116) .circle {
+  animation-delay: 3041ms;
+}
+.card_box .char .circle-container:nth-child(117) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-117;
+  animation-duration: 32992ms;
+  animation-delay: 15501ms;
+}
+@keyframes move-frames-117 {
+  from {
+    transform: translate3d(61vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(61vw, -112vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(117) .circle {
+  animation-delay: 3691ms;
+}
+.card_box .char .circle-container:nth-child(118) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-118;
+  animation-duration: 31439ms;
+  animation-delay: 18990ms;
+}
+@keyframes move-frames-118 {
+  from {
+    transform: translate3d(65vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(15vw, -130vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(118) .circle {
+  animation-delay: 2220ms;
+}
+.card_box .char .circle-container:nth-child(119) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-119;
+  animation-duration: 34296ms;
+  animation-delay: 22000ms;
+}
+@keyframes move-frames-119 {
+  from {
+    transform: translate3d(37vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(36vw, -131vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(119) .circle {
+  animation-delay: 3161ms;
+}
+.card_box .char .circle-container:nth-child(120) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-120;
+  animation-duration: 31746ms;
+  animation-delay: 35354ms;
+}
+@keyframes move-frames-120 {
+  from {
+    transform: translate3d(79vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(51vw, -136vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(120) .circle {
+  animation-delay: 3311ms;
+}
+.card_box .char .circle-container:nth-child(121) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-121;
+  animation-duration: 28802ms;
+  animation-delay: 14382ms;
+}
+@keyframes move-frames-121 {
+  from {
+    transform: translate3d(6vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(60vw, -127vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(121) .circle {
+  animation-delay: 227ms;
+}
+.card_box .char .circle-container:nth-child(122) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-122;
+  animation-duration: 35536ms;
+  animation-delay: 31741ms;
+}
+@keyframes move-frames-122 {
+  from {
+    transform: translate3d(90vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(46vw, -116vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(122) .circle {
+  animation-delay: 1888ms;
+}
+.card_box .char .circle-container:nth-child(123) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-123;
+  animation-duration: 31496ms;
+  animation-delay: 33638ms;
+}
+@keyframes move-frames-123 {
+  from {
+    transform: translate3d(87vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(64vw, -109vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(123) .circle {
+  animation-delay: 2816ms;
+}
+.card_box .char .circle-container:nth-child(124) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-124;
+  animation-duration: 36083ms;
+  animation-delay: 25554ms;
+}
+@keyframes move-frames-124 {
+  from {
+    transform: translate3d(57vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(65vw, -125vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(124) .circle {
+  animation-delay: 196ms;
+}
+.card_box .char .circle-container:nth-child(125) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-125;
+  animation-duration: 33846ms;
+  animation-delay: 5152ms;
+}
+@keyframes move-frames-125 {
+  from {
+    transform: translate3d(4vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(61vw, -120vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(125) .circle {
+  animation-delay: 784ms;
+}
+.card_box .char .circle-container:nth-child(126) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-126;
+  animation-duration: 31098ms;
+  animation-delay: 22095ms;
+}
+@keyframes move-frames-126 {
+  from {
+    transform: translate3d(80vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(81vw, -119vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(126) .circle {
+  animation-delay: 656ms;
+}
+.card_box .char .circle-container:nth-child(127) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-127;
+  animation-duration: 33063ms;
+  animation-delay: 8402ms;
+}
+@keyframes move-frames-127 {
+  from {
+    transform: translate3d(65vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(20vw, -127vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(127) .circle {
+  animation-delay: 2993ms;
+}
+.card_box .char .circle-container:nth-child(128) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-128;
+  animation-duration: 35378ms;
+  animation-delay: 26770ms;
+}
+@keyframes move-frames-128 {
+  from {
+    transform: translate3d(46vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(92vw, -137vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(128) .circle {
+  animation-delay: 1479ms;
+}
+.card_box .char .circle-container:nth-child(129) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-129;
+  animation-duration: 32279ms;
+  animation-delay: 31820ms;
+}
+@keyframes move-frames-129 {
+  from {
+    transform: translate3d(94vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(2vw, -121vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(129) .circle {
+  animation-delay: 26ms;
+}
+.card_box .char .circle-container:nth-child(130) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-130;
+  animation-duration: 36432ms;
+  animation-delay: 10900ms;
+}
+@keyframes move-frames-130 {
+  from {
+    transform: translate3d(26vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(69vw, -116vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(130) .circle {
+  animation-delay: 2656ms;
+}
+.card_box .char .circle-container:nth-child(131) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-131;
+  animation-duration: 35996ms;
+  animation-delay: 24801ms;
+}
+@keyframes move-frames-131 {
+  from {
+    transform: translate3d(81vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(99vw, -114vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(131) .circle {
+  animation-delay: 3229ms;
+}
+.card_box .char .circle-container:nth-child(132) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-132;
+  animation-duration: 32964ms;
+  animation-delay: 20281ms;
+}
+@keyframes move-frames-132 {
+  from {
+    transform: translate3d(50vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(28vw, -112vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(132) .circle {
+  animation-delay: 1261ms;
+}
+.card_box .char .circle-container:nth-child(133) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-133;
+  animation-duration: 32801ms;
+  animation-delay: 36186ms;
+}
+@keyframes move-frames-133 {
+  from {
+    transform: translate3d(7vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(18vw, -114vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(133) .circle {
+  animation-delay: 3643ms;
+}
+.card_box .char .circle-container:nth-child(134) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-134;
+  animation-duration: 31292ms;
+  animation-delay: 24822ms;
+}
+@keyframes move-frames-134 {
+  from {
+    transform: translate3d(12vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(77vw, -128vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(134) .circle {
+  animation-delay: 2897ms;
+}
+.card_box .char .circle-container:nth-child(135) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-135;
+  animation-duration: 29877ms;
+  animation-delay: 19850ms;
+}
+@keyframes move-frames-135 {
+  from {
+    transform: translate3d(75vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(29vw, -113vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(135) .circle {
+  animation-delay: 1748ms;
+}
+.card_box .char .circle-container:nth-child(136) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-136;
+  animation-duration: 30261ms;
+  animation-delay: 3205ms;
+}
+@keyframes move-frames-136 {
+  from {
+    transform: translate3d(62vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(81vw, -119vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(136) .circle {
+  animation-delay: 287ms;
+}
+.card_box .char .circle-container:nth-child(137) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-137;
+  animation-duration: 36007ms;
+  animation-delay: 5919ms;
+}
+@keyframes move-frames-137 {
+  from {
+    transform: translate3d(20vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(70vw, -127vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(137) .circle {
+  animation-delay: 3047ms;
+}
+.card_box .char .circle-container:nth-child(138) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-138;
+  animation-duration: 33461ms;
+  animation-delay: 17185ms;
+}
+@keyframes move-frames-138 {
+  from {
+    transform: translate3d(15vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(65vw, -110vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(138) .circle {
+  animation-delay: 1375ms;
+}
+.card_box .char .circle-container:nth-child(139) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-139;
+  animation-duration: 28627ms;
+  animation-delay: 14595ms;
+}
+@keyframes move-frames-139 {
+  from {
+    transform: translate3d(64vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(44vw, -124vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(139) .circle {
+  animation-delay: 849ms;
+}
+.card_box .char .circle-container:nth-child(140) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-140;
+  animation-duration: 28363ms;
+  animation-delay: 10315ms;
+}
+@keyframes move-frames-140 {
+  from {
+    transform: translate3d(18vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(4vw, -126vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(140) .circle {
+  animation-delay: 2545ms;
+}
+.card_box .char .circle-container:nth-child(141) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-141;
+  animation-duration: 34706ms;
+  animation-delay: 18937ms;
+}
+@keyframes move-frames-141 {
+  from {
+    transform: translate3d(33vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(96vw, -128vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(141) .circle {
+  animation-delay: 2536ms;
+}
+.card_box .char .circle-container:nth-child(142) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-142;
+  animation-duration: 28535ms;
+  animation-delay: 18133ms;
+}
+@keyframes move-frames-142 {
+  from {
+    transform: translate3d(40vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(52vw, -134vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(142) .circle {
+  animation-delay: 1571ms;
+}
+.card_box .char .circle-container:nth-child(143) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-143;
+  animation-duration: 36627ms;
+  animation-delay: 35596ms;
+}
+@keyframes move-frames-143 {
+  from {
+    transform: translate3d(14vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(56vw, -121vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(143) .circle {
+  animation-delay: 2768ms;
+}
+.card_box .char .circle-container:nth-child(144) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-144;
+  animation-duration: 30800ms;
+  animation-delay: 26872ms;
+}
+@keyframes move-frames-144 {
+  from {
+    transform: translate3d(87vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(24vw, -120vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(144) .circle {
+  animation-delay: 3093ms;
+}
+.card_box .char .circle-container:nth-child(145) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-145;
+  animation-duration: 35655ms;
+  animation-delay: 9727ms;
+}
+@keyframes move-frames-145 {
+  from {
+    transform: translate3d(65vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(21vw, -126vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(145) .circle {
+  animation-delay: 890ms;
+}
+.card_box .char .circle-container:nth-child(146) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-146;
+  animation-duration: 29744ms;
+  animation-delay: 19260ms;
+}
+@keyframes move-frames-146 {
+  from {
+    transform: translate3d(11vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(2vw, -110vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(146) .circle {
+  animation-delay: 2549ms;
+}
+.card_box .char .circle-container:nth-child(147) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-147;
+  animation-duration: 33210ms;
+  animation-delay: 23788ms;
+}
+@keyframes move-frames-147 {
+  from {
+    transform: translate3d(96vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(14vw, -118vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(147) .circle {
+  animation-delay: 1377ms;
+}
+.card_box .char .circle-container:nth-child(148) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-148;
+  animation-duration: 34447ms;
+  animation-delay: 33140ms;
+}
+@keyframes move-frames-148 {
+  from {
+    transform: translate3d(73vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(29vw, -124vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(148) .circle {
+  animation-delay: 981ms;
+}
+.card_box .char .circle-container:nth-child(149) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-149;
+  animation-duration: 35062ms;
+  animation-delay: 32449ms;
+}
+@keyframes move-frames-149 {
+  from {
+    transform: translate3d(35vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(30vw, -126vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(149) .circle {
+  animation-delay: 3473ms;
+}
+.card_box .char .circle-container:nth-child(150) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-150;
+  animation-duration: 34399ms;
+  animation-delay: 36470ms;
+}
+@keyframes move-frames-150 {
+  from {
+    transform: translate3d(14vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(10vw, -126vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(150) .circle {
+  animation-delay: 1669ms;
+}
+.card_box .char .circle-container:nth-child(151) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-151;
+  animation-duration: 34483ms;
+  animation-delay: 33236ms;
+}
+@keyframes move-frames-151 {
+  from {
+    transform: translate3d(2vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(5vw, -112vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(151) .circle {
+  animation-delay: 3398ms;
+}
+.card_box .char .circle-container:nth-child(152) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-152;
+  animation-duration: 35276ms;
+  animation-delay: 29949ms;
+}
+@keyframes move-frames-152 {
+  from {
+    transform: translate3d(2vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(69vw, -108vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(152) .circle {
+  animation-delay: 3437ms;
+}
+.card_box .char .circle-container:nth-child(153) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-153;
+  animation-duration: 35772ms;
+  animation-delay: 23367ms;
+}
+@keyframes move-frames-153 {
+  from {
+    transform: translate3d(98vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(23vw, -119vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(153) .circle {
+  animation-delay: 2680ms;
+}
+.card_box .char .circle-container:nth-child(154) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-154;
+  animation-duration: 35586ms;
+  animation-delay: 28547ms;
+}
+@keyframes move-frames-154 {
+  from {
+    transform: translate3d(84vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(92vw, -118vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(154) .circle {
+  animation-delay: 2940ms;
+}
+.card_box .char .circle-container:nth-child(155) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-155;
+  animation-duration: 36801ms;
+  animation-delay: 6048ms;
+}
+@keyframes move-frames-155 {
+  from {
+    transform: translate3d(40vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(56vw, -114vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(155) .circle {
+  animation-delay: 1778ms;
+}
+.card_box .char .circle-container:nth-child(156) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-156;
+  animation-duration: 36440ms;
+  animation-delay: 32751ms;
+}
+@keyframes move-frames-156 {
+  from {
+    transform: translate3d(38vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(45vw, -124vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(156) .circle {
+  animation-delay: 2571ms;
+}
+.card_box .char .circle-container:nth-child(157) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-157;
+  animation-duration: 33590ms;
+  animation-delay: 4408ms;
+}
+@keyframes move-frames-157 {
+  from {
+    transform: translate3d(36vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(16vw, -118vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(157) .circle {
+  animation-delay: 2626ms;
+}
+.card_box .char .circle-container:nth-child(158) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-158;
+  animation-duration: 34009ms;
+  animation-delay: 23083ms;
+}
+@keyframes move-frames-158 {
+  from {
+    transform: translate3d(95vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(91vw, -127vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(158) .circle {
+  animation-delay: 35ms;
+}
+.card_box .char .circle-container:nth-child(159) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-159;
+  animation-duration: 29477ms;
+  animation-delay: 4461ms;
+}
+@keyframes move-frames-159 {
+  from {
+    transform: translate3d(34vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(26vw, -119vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(159) .circle {
+  animation-delay: 1157ms;
+}
+.card_box .char .circle-container:nth-child(160) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-160;
+  animation-duration: 31385ms;
+  animation-delay: 10031ms;
+}
+@keyframes move-frames-160 {
+  from {
+    transform: translate3d(35vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(16vw, -115vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(160) .circle {
+  animation-delay: 3508ms;
+}
+.card_box .char .circle-container:nth-child(161) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-161;
+  animation-duration: 31210ms;
+  animation-delay: 32090ms;
+}
+@keyframes move-frames-161 {
+  from {
+    transform: translate3d(26vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(87vw, -113vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(161) .circle {
+  animation-delay: 2571ms;
+}
+.card_box .char .circle-container:nth-child(162) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-162;
+  animation-duration: 33198ms;
+  animation-delay: 27541ms;
+}
+@keyframes move-frames-162 {
+  from {
+    transform: translate3d(82vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(35vw, -105vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(162) .circle {
+  animation-delay: 1536ms;
+}
+.card_box .char .circle-container:nth-child(163) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-163;
+  animation-duration: 31732ms;
+  animation-delay: 15524ms;
+}
+@keyframes move-frames-163 {
+  from {
+    transform: translate3d(26vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(77vw, -117vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(163) .circle {
+  animation-delay: 1296ms;
+}
+.card_box .char .circle-container:nth-child(164) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-164;
+  animation-duration: 29184ms;
+  animation-delay: 36779ms;
+}
+@keyframes move-frames-164 {
+  from {
+    transform: translate3d(50vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(88vw, -107vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(164) .circle {
+  animation-delay: 315ms;
+}
+.card_box .char .circle-container:nth-child(165) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-165;
+  animation-duration: 30537ms;
+  animation-delay: 13882ms;
+}
+@keyframes move-frames-165 {
+  from {
+    transform: translate3d(44vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(7vw, -134vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(165) .circle {
+  animation-delay: 3989ms;
+}
+.card_box .char .circle-container:nth-child(166) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-166;
+  animation-duration: 28735ms;
+  animation-delay: 12674ms;
+}
+@keyframes move-frames-166 {
+  from {
+    transform: translate3d(61vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(61vw, -109vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(166) .circle {
+  animation-delay: 2782ms;
+}
+.card_box .char .circle-container:nth-child(167) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-167;
+  animation-duration: 28382ms;
+  animation-delay: 9570ms;
+}
+@keyframes move-frames-167 {
+  from {
+    transform: translate3d(95vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(36vw, -121vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(167) .circle {
+  animation-delay: 3029ms;
+}
+.card_box .char .circle-container:nth-child(168) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-168;
+  animation-duration: 30971ms;
+  animation-delay: 8569ms;
+}
+@keyframes move-frames-168 {
+  from {
+    transform: translate3d(99vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(3vw, -122vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(168) .circle {
+  animation-delay: 3046ms;
+}
+.card_box .char .circle-container:nth-child(169) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-169;
+  animation-duration: 35079ms;
+  animation-delay: 22432ms;
+}
+@keyframes move-frames-169 {
+  from {
+    transform: translate3d(45vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(81vw, -111vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(169) .circle {
+  animation-delay: 934ms;
+}
+.card_box .char .circle-container:nth-child(170) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-170;
+  animation-duration: 34737ms;
+  animation-delay: 546ms;
+}
+@keyframes move-frames-170 {
+  from {
+    transform: translate3d(84vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(63vw, -112vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(170) .circle {
+  animation-delay: 3355ms;
+}
+.card_box .char .circle-container:nth-child(171) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-171;
+  animation-duration: 30046ms;
+  animation-delay: 31644ms;
+}
+@keyframes move-frames-171 {
+  from {
+    transform: translate3d(80vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(76vw, -121vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(171) .circle {
+  animation-delay: 3038ms;
+}
+.card_box .char .circle-container:nth-child(172) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-172;
+  animation-duration: 31967ms;
+  animation-delay: 32056ms;
+}
+@keyframes move-frames-172 {
+  from {
+    transform: translate3d(63vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(46vw, -120vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(172) .circle {
+  animation-delay: 1462ms;
+}
+.card_box .char .circle-container:nth-child(173) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-173;
+  animation-duration: 36379ms;
+  animation-delay: 22468ms;
+}
+@keyframes move-frames-173 {
+  from {
+    transform: translate3d(72vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(48vw, -138vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(173) .circle {
+  animation-delay: 3828ms;
+}
+.card_box .char .circle-container:nth-child(174) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-174;
+  animation-duration: 32204ms;
+  animation-delay: 11058ms;
+}
+@keyframes move-frames-174 {
+  from {
+    transform: translate3d(25vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(64vw, -127vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(174) .circle {
+  animation-delay: 3329ms;
+}
+.card_box .char .circle-container:nth-child(175) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-175;
+  animation-duration: 34517ms;
+  animation-delay: 12928ms;
+}
+@keyframes move-frames-175 {
+  from {
+    transform: translate3d(75vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(7vw, -118vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(175) .circle {
+  animation-delay: 1086ms;
+}
+.card_box .char .circle-container:nth-child(176) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-176;
+  animation-duration: 29626ms;
+  animation-delay: 12444ms;
+}
+@keyframes move-frames-176 {
+  from {
+    transform: translate3d(27vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(9vw, -113vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(176) .circle {
+  animation-delay: 3335ms;
+}
+.card_box .char .circle-container:nth-child(177) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-177;
+  animation-duration: 32908ms;
+  animation-delay: 10738ms;
+}
+@keyframes move-frames-177 {
+  from {
+    transform: translate3d(80vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(17vw, -130vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(177) .circle {
+  animation-delay: 3162ms;
+}
+.card_box .char .circle-container:nth-child(178) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-178;
+  animation-duration: 33486ms;
+  animation-delay: 13599ms;
+}
+@keyframes move-frames-178 {
+  from {
+    transform: translate3d(31vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(74vw, -114vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(178) .circle {
+  animation-delay: 2419ms;
+}
+.card_box .char .circle-container:nth-child(179) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-179;
+  animation-duration: 28896ms;
+  animation-delay: 2616ms;
+}
+@keyframes move-frames-179 {
+  from {
+    transform: translate3d(57vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(94vw, -112vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(179) .circle {
+  animation-delay: 687ms;
+}
+.card_box .char .circle-container:nth-child(180) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-180;
+  animation-duration: 34983ms;
+  animation-delay: 18277ms;
+}
+@keyframes move-frames-180 {
+  from {
+    transform: translate3d(54vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(14vw, -119vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(180) .circle {
+  animation-delay: 2369ms;
+}
+.card_box .char .circle-container:nth-child(181) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-181;
+  animation-duration: 32002ms;
+  animation-delay: 28779ms;
+}
+@keyframes move-frames-181 {
+  from {
+    transform: translate3d(83vw, 104vh, 0);
+  }
+  to {
+    transform: translate3d(94vw, -118vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(181) .circle {
+  animation-delay: 1280ms;
+}
+.card_box .char .circle-container:nth-child(182) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-182;
+  animation-duration: 30647ms;
+  animation-delay: 4811ms;
+}
+@keyframes move-frames-182 {
+  from {
+    transform: translate3d(48vw, 109vh, 0);
+  }
+  to {
+    transform: translate3d(67vw, -137vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(182) .circle {
+  animation-delay: 3625ms;
+}
+.card_box .char .circle-container:nth-child(183) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-183;
+  animation-duration: 30253ms;
+  animation-delay: 30546ms;
+}
+@keyframes move-frames-183 {
+  from {
+    transform: translate3d(52vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(57vw, -120vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(183) .circle {
+  animation-delay: 800ms;
+}
+.card_box .char .circle-container:nth-child(184) {
+  width: 4px;
+  height: 4px;
+  z-index: 200;
+  animation-name: move-frames-184;
+  animation-duration: 34396ms;
+  animation-delay: 20555ms;
+}
+@keyframes move-frames-184 {
+  from {
+    transform: translate3d(97vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(9vw, -103vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(184) .circle {
+  animation-delay: 744ms;
+}
+.card_box .char .circle-container:nth-child(185) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-185;
+  animation-duration: 33922ms;
+  animation-delay: 32843ms;
+}
+@keyframes move-frames-185 {
+  from {
+    transform: translate3d(27vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(46vw, -119vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(185) .circle {
+  animation-delay: 3373ms;
+}
+.card_box .char .circle-container:nth-child(186) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-186;
+  animation-duration: 29031ms;
+  animation-delay: 21812ms;
+}
+@keyframes move-frames-186 {
+  from {
+    transform: translate3d(86vw, 103vh, 0);
+  }
+  to {
+    transform: translate3d(40vw, -123vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(186) .circle {
+  animation-delay: 1802ms;
+}
+.card_box .char .circle-container:nth-child(187) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-187;
+  animation-duration: 31448ms;
+  animation-delay: 30810ms;
+}
+@keyframes move-frames-187 {
+  from {
+    transform: translate3d(43vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(88vw, -115vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(187) .circle {
+  animation-delay: 2741ms;
+}
+.card_box .char .circle-container:nth-child(188) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-188;
+  animation-duration: 31421ms;
+  animation-delay: 12973ms;
+}
+@keyframes move-frames-188 {
+  from {
+    transform: translate3d(21vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(7vw, -114vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(188) .circle {
+  animation-delay: 710ms;
+}
+.card_box .char .circle-container:nth-child(189) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-189;
+  animation-duration: 29246ms;
+  animation-delay: 26580ms;
+}
+@keyframes move-frames-189 {
+  from {
+    transform: translate3d(74vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(87vw, -105vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(189) .circle {
+  animation-delay: 3350ms;
+}
+.card_box .char .circle-container:nth-child(190) {
+  width: 2px;
+  height: 2px;
+  z-index: 200;
+  animation-name: move-frames-190;
+  animation-duration: 33523ms;
+  animation-delay: 17946ms;
+}
+@keyframes move-frames-190 {
+  from {
+    transform: translate3d(78vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(12vw, -118vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(190) .circle {
+  animation-delay: 2049ms;
+}
+.card_box .char .circle-container:nth-child(191) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-191;
+  animation-duration: 31351ms;
+  animation-delay: 14612ms;
+}
+@keyframes move-frames-191 {
+  from {
+    transform: translate3d(13vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(38vw, -137vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(191) .circle {
+  animation-delay: 2805ms;
+}
+.card_box .char .circle-container:nth-child(192) {
+  width: 5px;
+  height: 5px;
+  z-index: 200;
+  animation-name: move-frames-192;
+  animation-duration: 36157ms;
+  animation-delay: 2251ms;
+}
+@keyframes move-frames-192 {
+  from {
+    transform: translate3d(25vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(20vw, -135vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(192) .circle {
+  animation-delay: 1293ms;
+}
+.card_box .char .circle-container:nth-child(193) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-193;
+  animation-duration: 36157ms;
+  animation-delay: 14890ms;
+}
+@keyframes move-frames-193 {
+  from {
+    transform: translate3d(93vw, 102vh, 0);
+  }
+  to {
+    transform: translate3d(31vw, -124vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(193) .circle {
+  animation-delay: 3724ms;
+}
+.card_box .char .circle-container:nth-child(194) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-194;
+  animation-duration: 31749ms;
+  animation-delay: 14776ms;
+}
+@keyframes move-frames-194 {
+  from {
+    transform: translate3d(86vw, 108vh, 0);
+  }
+  to {
+    transform: translate3d(41vw, -110vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(194) .circle {
+  animation-delay: 130ms;
+}
+.card_box .char .circle-container:nth-child(195) {
+  width: 1px;
+  height: 1px;
+  z-index: 200;
+  animation-name: move-frames-195;
+  animation-duration: 34499ms;
+  animation-delay: 20198ms;
+}
+@keyframes move-frames-195 {
+  from {
+    transform: translate3d(89vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(54vw, -135vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(195) .circle {
+  animation-delay: 928ms;
+}
+.card_box .char .circle-container:nth-child(196) {
+  width: 3px;
+  height: 3px;
+  z-index: 200;
+  animation-name: move-frames-196;
+  animation-duration: 29066ms;
+  animation-delay: 30776ms;
+}
+@keyframes move-frames-196 {
+  from {
+    transform: translate3d(67vw, 106vh, 0);
+  }
+  to {
+    transform: translate3d(5vw, -129vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(196) .circle {
+  animation-delay: 3758ms;
+}
+.card_box .char .circle-container:nth-child(197) {
+  width: 7px;
+  height: 7px;
+  z-index: 200;
+  animation-name: move-frames-197;
+  animation-duration: 33938ms;
+  animation-delay: 953ms;
+}
+@keyframes move-frames-197 {
+  from {
+    transform: translate3d(66vw, 105vh, 0);
+  }
+  to {
+    transform: translate3d(32vw, -108vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(197) .circle {
+  animation-delay: 2713ms;
+}
+.card_box .char .circle-container:nth-child(198) {
+  width: 8px;
+  height: 8px;
+  z-index: 200;
+  animation-name: move-frames-198;
+  animation-duration: 28112ms;
+  animation-delay: 31035ms;
+}
+@keyframes move-frames-198 {
+  from {
+    transform: translate3d(19vw, 110vh, 0);
+  }
+  to {
+    transform: translate3d(87vw, -138vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(198) .circle {
+  animation-delay: 1264ms;
+}
+.card_box .char .circle-container:nth-child(199) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-199;
+  animation-duration: 32537ms;
+  animation-delay: 16685ms;
+}
+@keyframes move-frames-199 {
+  from {
+    transform: translate3d(95vw, 101vh, 0);
+  }
+  to {
+    transform: translate3d(15vw, -131vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(199) .circle {
+  animation-delay: 2190ms;
+}
+.card_box .char .circle-container:nth-child(200) {
+  width: 6px;
+  height: 6px;
+  z-index: 200;
+  animation-name: move-frames-200;
+  animation-duration: 31067ms;
+  animation-delay: 4517ms;
+}
+@keyframes move-frames-200 {
+  from {
+    transform: translate3d(73vw, 107vh, 0);
+  }
+  to {
+    transform: translate3d(50vw, -108vh, 0);
+  }
+}
+.card_box .char .circle-container:nth-child(200) .circle {
+  animation-delay: 1873ms;
+}
+.card_box:hover .char {
+  opacity: 1;
+  visibility: visible;
+  bottom: 40%;
+  animation: UpDown 5s infinite ease-in-out;
+}
+
+@keyframes gradientWinds {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes UpDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes shine {
+  0% {
+    top: -120%;
+    left: -120%;
+  }
+  10% {
+    left: 100%;
+    top: 100%;
+  }
+  20% {
+    left: 100%;
+    top: 100%;
+  }
+  100% {
+    left: 100%;
+    top: 100%;
+  }
+}/*# sourceMappingURL=styles.css.map */
