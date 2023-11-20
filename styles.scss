@@ -29,6 +29,53 @@ body {
     gap: 30px;
 }
 
+/* ============= modal box ============= */
+.modal {
+    left: 0;
+    top: 0;
+    width: 100lvw;
+    height: 100lvh;
+    position: fixed;
+    background-color: #00000089;
+    z-index: 50000;
+    &.hide {
+        display: none;
+    }
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .box {
+        height: max-content;
+        border: 1px solid rgb(168, 6, 6)(225, 3, 3);
+        background-color: #000;
+        padding: 1rem;
+        border-radius: 6px;
+        animation: downLike 0.7s ease-in-out;
+
+        #start {
+            padding: 1.5rem;
+            border: none;
+            background-color: aquamarine;
+            font-size: 20px;
+            font-weight: 600;
+            font-style: italic;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: brown;
+        }
+    }
+}
+@keyframes downLike {
+    0% {
+        transform: translateY(150px);
+    }
+    80% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
 
 /* ============= card box ============= */
 .card_box {
